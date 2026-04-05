@@ -182,7 +182,7 @@
     if (isRTL) {
         _doneButton.frame = CGRectMake(12, 0, MAX(44, _doneButton.tz_width), 44);
     } else {
-        _doneButton.frame = CGRectMake(self.view.tz_width - _doneButton.tz_width - 12, 0, MAX(44, _doneButton.tz_width), 44);
+        _doneButton.frame = CGRectMake(self.view.tz_width - _doneButton.tz_width - 12, 0, _doneButton.tz_width, 44);
     }
     _playButton.frame = CGRectMake(0, statusBarAndNaviBarHeight, self.view.tz_width, self.view.tz_height - statusBarAndNaviBarHeight - toolBarHeight);
     if (tzImagePickerVc.allowEditVideo) {
