@@ -634,6 +634,8 @@ static CGFloat itemMargin = 5;
             cell.imageView.backgroundColor = [UIColor colorWithRed:57 / 255.0 green:61 / 255.0 blue:70 / 255.0 alpha:1.0];
 //            cell.imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
         }
+        cell.layer.cornerRadius = 7;
+        cell.layer.masksToBounds = YES;
         return cell;
     }
     // the cell dipaly photo or video / 展示照片或视频的cell
@@ -657,7 +659,8 @@ static CGFloat itemMargin = 5;
     }
     cell.showSelectBtn = tzImagePickerVc.showSelectBtn;
     cell.allowPreview = tzImagePickerVc.allowPreview;
-    
+    cell.layer.cornerRadius = 7;
+    cell.layer.masksToBounds = YES;
     BOOL notSelectable = [TZCommonTools isAssetNotSelectable:model tzImagePickerVc:tzImagePickerVc];
     if (notSelectable && tzImagePickerVc.showPhotoCannotSelectLayer && !model.isSelected) {
         cell.cannotSelectLayerButton.backgroundColor = tzImagePickerVc.cannotSelectLayerColor;
@@ -906,8 +909,8 @@ static CGFloat itemMargin = 5;
     
     _numberImageView.hidden = tzImagePickerVc.selectedModels.count <= 0;
     _numberLabel.hidden = tzImagePickerVc.selectedModels.count <= 0;
-    _numberLabel.text = [NSString stringWithFormat:@"%zd",tzImagePickerVc.selectedModels.count];
-    
+//    _numberLabel.text = [NSString stringWithFormat:@"%zd",tzImagePickerVc.selectedModels.count];
+    _numberLabel.text = [NSString stringWithFormat:@"%zd/%ld",tzImagePickerVc.selectedModels.count, tzImagePickerVc.maxImagesCount];
     _originalPhotoButton.enabled = tzImagePickerVc.selectedModels.count > 0;
     _originalPhotoButton.selected = (_isSelectOriginalPhoto && _originalPhotoButton.enabled);
     _originalPhotoLabel.hidden = (!_originalPhotoButton.isSelected);

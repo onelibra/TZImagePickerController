@@ -161,6 +161,13 @@
     [_doneButton addTarget:self action:@selector(doneButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [_doneButton setTitle:_tzImagePickerVc.doneBtnTitleStr forState:UIControlStateNormal];
     [_doneButton setTitleColor:_tzImagePickerVc.oKButtonTitleColorNormal forState:UIControlStateNormal];
+    _doneButton.layer.cornerRadius = 16.5;
+    _doneButton.layer.masksToBounds = YES;
+    if(_doneButton.isEnabled) {
+        _doneButton.backgroundColor = [UIColor colorWithRed:0/255.0 green:137/255.0 blue:255/255.0 alpha:1];
+    }else {
+        _doneButton.backgroundColor = [UIColor colorWithRed:57/255.0 green:61/255.0 blue:70/255.0 alpha:1];
+    }
     
     _numberImageView = [[UIImageView alloc] initWithImage:_tzImagePickerVc.photoNumberIconImage];
     _numberImageView.backgroundColor = [UIColor clearColor];
@@ -173,7 +180,8 @@
     _numberLabel.adjustsFontSizeToFitWidth = YES;
     _numberLabel.textColor = [UIColor whiteColor];
     _numberLabel.textAlignment = NSTextAlignmentCenter;
-    _numberLabel.text = [NSString stringWithFormat:@"%zd",_tzImagePickerVc.selectedModels.count];
+//    _numberLabel.text = [NSString stringWithFormat:@"%zd",_tzImagePickerVc.selectedModels.count];
+    _numberLabel.text = [NSString stringWithFormat:@"%zd/%ld",_tzImagePickerVc.selectedModels.count, _tzImagePickerVc.maxImagesCount];
     _numberLabel.hidden = _tzImagePickerVc.selectedModels.count <= 0;
     _numberLabel.backgroundColor = [UIColor clearColor];
     _numberLabel.userInteractionEnabled = YES;
@@ -323,11 +331,11 @@
 //        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 5, 10, 24, 24);
 //    }
     if (isRTL) {
-        _doneButton.frame = CGRectMake(12, 0, MAX(44, _doneButton.tz_width), 44);
-        _numberImageView.frame = CGRectMake(_doneButton.tz_right + 5, 10, 24, 24);
+        _doneButton.frame = CGRectMake(self.view.tz_width - 120, 8, 100, 33);
+        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 15, 13, 24, 24);
     } else {
-        _doneButton.frame = CGRectMake(self.view.tz_width - _doneButton.tz_width - 15, 0, _doneButton.tz_width, 44);
-        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 5, 10, 24, 24);
+        _doneButton.frame = CGRectMake(self.view.tz_width - 120, 8, 100, 33);
+        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 15, 13, 24, 24);
     }
     _numberLabel.frame = _numberImageView.frame;
     
@@ -613,7 +621,8 @@
     } else {
         _indexLabel.hidden = YES;
     }
-    _numberLabel.text = [NSString stringWithFormat:@"%zd",_tzImagePickerVc.selectedModels.count];
+//    _numberLabel.text = [NSString stringWithFormat:@"%zd",_tzImagePickerVc.selectedModels.count];
+    _numberLabel.text = [NSString stringWithFormat:@"%zd/%ld",_tzImagePickerVc.selectedModels.count, _tzImagePickerVc.maxImagesCount];
     _numberImageView.hidden = (_tzImagePickerVc.selectedModels.count <= 0 || _isHideNaviBar || _isCropImage);
     _numberLabel.hidden = (_tzImagePickerVc.selectedModels.count <= 0 || _isHideNaviBar || _isCropImage);
     

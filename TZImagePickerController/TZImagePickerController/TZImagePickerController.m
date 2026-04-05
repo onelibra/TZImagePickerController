@@ -904,7 +904,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TZAlbumCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TZAlbumCell" forIndexPath:indexPath];
     if (@available(iOS 13.0, *)) {
-        cell.backgroundColor = UIColor.tertiarySystemBackgroundColor;
+        cell.backgroundColor = [UIColor colorWithRed:25/255.0 green:27/255.0 blue:31/255.0 alpha:1]; // UIColor.tertiarySystemBackgroundColor;
     }
     TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
     cell.albumCellDidLayoutSubviewsBlock = imagePickerVc.albumCellDidLayoutSubviewsBlock;
