@@ -101,7 +101,7 @@
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     
     _naviBar = [[UIView alloc] initWithFrame:CGRectZero];
-    _naviBar.backgroundColor = [UIColor colorWithRed:(34/255.0) green:(34/255.0)  blue:(34/255.0) alpha:0.7];
+    _naviBar.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0]; // [UIColor colorWithRed:(34/255.0) green:(34/255.0)  blue:(34/255.0) alpha:0.7];
     
     _backButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [_backButton setImage:[UIImage tz_imageNamedFromMyBundle:@"navi_back"] forState:UIControlStateNormal];
@@ -132,7 +132,7 @@
 - (void)configBottomToolBar {
     _toolBar = [[UIView alloc] initWithFrame:CGRectZero];
     static CGFloat rgb = 34 / 255.0;
-    _toolBar.backgroundColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:0.7];
+    _toolBar.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0]; //[UIColor colorWithRed:rgb green:rgb blue:rgb alpha:0.7];
     
     TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     if (_tzImagePickerVc.allowPickingOriginalPhoto) {
@@ -197,7 +197,7 @@
     _layout = [TZCommonTools tz_rtlFlowLayout];
     _layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_layout];
-    _collectionView.backgroundColor = [UIColor blackColor];
+    _collectionView.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0]; // [UIColor blackColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     _collectionView.pagingEnabled = YES;
@@ -267,13 +267,22 @@
     CGFloat naviBarHeight = statusBarHeight + _tzImagePickerVc.navigationBar.tz_height;
     _naviBar.frame = CGRectMake(0, 0, self.view.tz_width, naviBarHeight);
     
+//    if (isRTL) {
+//        _backButton.frame = CGRectMake(self.view.tz_width - 54, 10 + statusBarHeightInterval, 44, 44);
+//        _backButton.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
+//        _selectButton.frame = CGRectMake(12, 10 + statusBarHeightInterval, 44, 44);
+//    } else {
+//        _backButton.frame = CGRectMake(10, 10 + statusBarHeightInterval, 44, 44);
+//        _selectButton.frame = CGRectMake(self.view.tz_width - 56, 10 + statusBarHeightInterval, 44, 44);
+//    }
+    
     if (isRTL) {
         _backButton.frame = CGRectMake(self.view.tz_width - 54, 10 + statusBarHeightInterval, 44, 44);
         _backButton.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
         _selectButton.frame = CGRectMake(12, 10 + statusBarHeightInterval, 44, 44);
     } else {
-        _backButton.frame = CGRectMake(10, 10 + statusBarHeightInterval, 44, 44);
-        _selectButton.frame = CGRectMake(self.view.tz_width - 56, 10 + statusBarHeightInterval, 44, 44);
+        _backButton.frame = CGRectMake(0, 10 + statusBarHeightInterval, 44, 44);
+        _selectButton.frame = CGRectMake(self.view.tz_width - 46, 10 + statusBarHeightInterval, 44, 44);
     }
     
     _indexLabel.frame = _selectButton.frame;
@@ -306,11 +315,18 @@
     }
     
     [_doneButton sizeToFit];
+//    if (isRTL) {
+//        _doneButton.frame = CGRectMake(12, 0, MAX(44, _doneButton.tz_width), 44);
+//        _numberImageView.frame = CGRectMake(_doneButton.tz_right + 5, 10, 24, 24);
+//    } else {
+//        _doneButton.frame = CGRectMake(self.view.tz_width - _doneButton.tz_width - 12, 0, MAX(44, _doneButton.tz_width), 44);
+//        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 5, 10, 24, 24);
+//    }
     if (isRTL) {
         _doneButton.frame = CGRectMake(12, 0, MAX(44, _doneButton.tz_width), 44);
         _numberImageView.frame = CGRectMake(_doneButton.tz_right + 5, 10, 24, 24);
     } else {
-        _doneButton.frame = CGRectMake(self.view.tz_width - _doneButton.tz_width - 12, 0, MAX(44, _doneButton.tz_width), 44);
+        _doneButton.frame = CGRectMake(self.view.tz_width - _doneButton.tz_width - 15, 0, _doneButton.tz_width, 44);
         _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 5, 10, 24, 24);
     }
     _numberLabel.frame = _numberImageView.frame;
@@ -551,7 +567,7 @@
             [weakSelf didICloudSyncStatusChanged:model];
         };
     }
-    
+    cell.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
     cell.model = model;
     [cell setSingleTapGestureBlock:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;

@@ -113,6 +113,7 @@
         self.navigationBar.standardAppearance = barAppearance;
         self.navigationBar.scrollEdgeAppearance = barAppearance;
     }
+    self.navigationBar.clipsToBounds = YES;
 }
 
 - (void)setBarItemTextFont:(UIFont *)barItemTextFont {
@@ -769,9 +770,11 @@
     }
     self.isFirstAppear = YES;
     if (@available(iOS 13.0, *)) {
-        self.view.backgroundColor = UIColor.tertiarySystemBackgroundColor;
+        self.view.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
+//        self.view.backgroundColor = UIColor.tertiarySystemBackgroundColor;
     } else {
-        self.view.backgroundColor = [UIColor whiteColor];
+        self.view.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
+//        self.view.backgroundColor = [UIColor whiteColor];
     }
     
     TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
@@ -825,9 +828,11 @@
                     self->_tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
                     self->_tableView.rowHeight = 70;
                     if (@available(iOS 13.0, *)) {
-                        self->_tableView.backgroundColor = [UIColor tertiarySystemBackgroundColor];
+                        self->_tableView.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
+//                        self->_tableView.backgroundColor = [UIColor tertiarySystemBackgroundColor];
                     } else {
-                        self->_tableView.backgroundColor = [UIColor whiteColor];
+                        self->_tableView.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
+//                        self->_tableView.backgroundColor = [UIColor whiteColor];
                     }
                     self->_tableView.tableFooterView = [[UIView alloc] init];
                     self->_tableView.dataSource = self;

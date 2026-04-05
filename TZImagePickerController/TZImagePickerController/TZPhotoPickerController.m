@@ -89,9 +89,9 @@ static CGFloat itemMargin = 5;
     _isSelectOriginalPhoto = tzImagePickerVc.isSelectOriginalPhoto;
     _shouldScrollToBottom = YES;
     if (@available(iOS 13.0, *)) {
-        self.view.backgroundColor = UIColor.tertiarySystemBackgroundColor;
+        self.view.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
     } else {
-        self.view.backgroundColor = [UIColor whiteColor];
+        self.view.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
     }
     self.navigationItem.title = _model.name;
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:tzImagePickerVc.cancelBtnTitleStr style:UIBarButtonItemStylePlain target:tzImagePickerVc action:@selector(cancelButtonClick)];
@@ -178,9 +178,9 @@ static CGFloat itemMargin = 5;
         _layout = [TZCommonTools tz_rtlFlowLayout];
         _collectionView = [[TZCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_layout];
         if (@available(iOS 13.0, *)) {
-            _collectionView.backgroundColor = UIColor.tertiarySystemBackgroundColor;
+            _collectionView.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];;
         } else {
-            _collectionView.backgroundColor = [UIColor whiteColor];
+            _collectionView.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
         }
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
@@ -251,9 +251,9 @@ static CGFloat itemMargin = 5;
     _bottomToolBar = [[UIView alloc] initWithFrame:CGRectZero];
     CGFloat rgb = 253 / 255.0;
     if (@available(iOS 13.0, *)) {
-        _bottomToolBar.backgroundColor = UIColor.tertiarySystemBackgroundColor;
+        _bottomToolBar.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
     } else {
-        _bottomToolBar.backgroundColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:1.0];
+        _bottomToolBar.backgroundColor = [UIColor colorWithRed:25 / 255.0 green:27 / 255.0 blue:31 / 255.0 alpha:1.0];
     }
     
     _previewButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -262,11 +262,11 @@ static CGFloat itemMargin = 5;
     [_previewButton setTitle:tzImagePickerVc.previewBtnTitleStr forState:UIControlStateNormal];
     [_previewButton setTitle:tzImagePickerVc.previewBtnTitleStr forState:UIControlStateDisabled];
     if (@available(iOS 13.0, *)) {
-        [_previewButton setTitleColor:UIColor.labelColor forState:UIControlStateNormal];
+        [_previewButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     } else {
-        [_previewButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_previewButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
-    [_previewButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    [_previewButton setTitleColor:[UIColor colorWithRed:254 / 255.0 green:254 / 255.0 blue:255 /255.0 alpha:1.0] forState:UIControlStateDisabled];
     _previewButton.enabled = tzImagePickerVc.selectedModels.count;
     
     if (tzImagePickerVc.allowPickingOriginalPhoto) {
@@ -309,6 +309,14 @@ static CGFloat itemMargin = 5;
     [_doneButton setTitleColor:tzImagePickerVc.oKButtonTitleColorDisabled forState:UIControlStateDisabled];
     _doneButton.enabled = tzImagePickerVc.selectedModels.count || tzImagePickerVc.alwaysEnableDoneBtn;
     
+    _doneButton.layer.cornerRadius = 16.5;
+    _doneButton.layer.masksToBounds = YES;
+    if(_doneButton.isEnabled) {
+        _doneButton.backgroundColor = [UIColor colorWithRed:0/255.0 green:137/255.0 blue:255/255.0 alpha:1];
+    } else {
+        _doneButton.backgroundColor = [UIColor colorWithRed:57/255.0 green:61/255.0 blue:70/255.0 alpha:1];
+    }
+    
     _numberImageView = [[UIImageView alloc] initWithImage:tzImagePickerVc.photoNumberIconImage];
     _numberImageView.hidden = tzImagePickerVc.selectedModels.count <= 0;
     _numberImageView.clipsToBounds = YES;
@@ -324,6 +332,7 @@ static CGFloat itemMargin = 5;
     _numberLabel.hidden = tzImagePickerVc.selectedModels.count <= 0;
     _numberLabel.backgroundColor = [UIColor clearColor];
     _numberLabel.userInteractionEnabled = YES;
+    _numberLabel.text = [NSString stringWithFormat:@"%zd/%ld",tzImagePickerVc.selectedModels.count, tzImagePickerVc.maxImagesCount];
 
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doneButtonClick)];
     [_numberLabel addGestureRecognizer:tapGesture];
@@ -339,9 +348,9 @@ static CGFloat itemMargin = 5;
                 return [UIColor colorWithRed:lineDarkRgb green:lineDarkRgb blue:lineDarkRgb alpha:1.0];
             }
         }];
-        _divideLine.backgroundColor = divideLineDyColor;
+        _divideLine.backgroundColor = [UIColor clearColor];;
     } else {
-        _divideLine.backgroundColor = [UIColor colorWithRed:rgb2 green:rgb2 blue:rgb2 alpha:1.0];
+        _divideLine.backgroundColor = [UIColor clearColor];
     }
     
     [_bottomToolBar addSubview:_divideLine];
@@ -433,11 +442,15 @@ static CGFloat itemMargin = 5;
     [_doneButton sizeToFit];
     CGFloat donwButtonWidth = MAX(44, _doneButton.tz_width);
     if (isRTL) {
-        _doneButton.frame = CGRectMake(12, 0, donwButtonWidth, 50);
-        _numberImageView.frame = CGRectMake(_doneButton.tz_right + 5, 13, 24, 24);
+        _doneButton.frame = CGRectMake(self.view.tz_width - 120, 8, 100, 33);
+        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 15, 13, 24, 24);
+//        _doneButton.frame = CGRectMake(12, 0, donwButtonWidth, 50);
+//        _numberImageView.frame = CGRectMake(_doneButton.tz_right + 5, 13, 24, 24);
     } else {
-        _doneButton.frame = CGRectMake(self.view.tz_width - donwButtonWidth - 12, 0, donwButtonWidth, 50);
-        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 5, 13, 24, 24);
+        _doneButton.frame = CGRectMake(self.view.tz_width - 120, 8, 100, 33);
+        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 15, 13, 24, 24);
+//        _doneButton.frame = CGRectMake(self.view.tz_width - donwButtonWidth - 12, 0, donwButtonWidth, 50);
+//        _numberImageView.frame = CGRectMake(_doneButton.tz_left - 24 - 5, 13, 24, 24);
     }
     _numberLabel.frame = _numberImageView.frame;
     _divideLine.frame = CGRectMake(0, 0, self.view.tz_width, 1);
@@ -615,9 +628,11 @@ static CGFloat itemMargin = 5;
         if ([tzImagePickerVc.takePictureImageName isEqualToString:@"takePicture80"]) {
             cell.imageView.contentMode = UIViewContentModeCenter;
             CGFloat rgb = 223 / 255.0;
-            cell.imageView.backgroundColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:1.0];
+            cell.imageView.backgroundColor = [UIColor colorWithRed:57 / 255.0 green:61 / 255.0 blue:70 / 255.0 alpha:1.0];
+//            cell.imageView.backgroundColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:1.0];
         } else {
-            cell.imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
+            cell.imageView.backgroundColor = [UIColor colorWithRed:57 / 255.0 green:61 / 255.0 blue:70 / 255.0 alpha:1.0];
+//            cell.imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
         }
         return cell;
     }
@@ -900,6 +915,11 @@ static CGFloat itemMargin = 5;
     
     if (tzImagePickerVc.photoPickerPageDidRefreshStateBlock) {
         tzImagePickerVc.photoPickerPageDidRefreshStateBlock(_collectionView, _bottomToolBar, _previewButton, _originalPhotoButton, _originalPhotoLabel, _doneButton, _numberImageView, _numberLabel, _divideLine);;
+    }
+    if(_doneButton.isEnabled) {
+        _doneButton.backgroundColor = [UIColor colorWithRed:0/255.0 green:137/255.0 blue:255/255.0 alpha:1];
+    }else {
+        _doneButton.backgroundColor = [UIColor colorWithRed:57/255.0 green:61/255.0 blue:70/255.0 alpha:1];
     }
 }
 
